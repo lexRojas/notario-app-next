@@ -1,0 +1,163 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model acto {
+  id_acto           Int             @id @default(autoincrement())
+  acto_descripcion  String?         @db.VarChar(100)
+  porcentaje_tarifa Float?
+  registro_acto     registro_acto[]
+  tarifario         tarifario[]
+}
+
+model calendario {
+  fecha   DateTime @id @db.Date
+  evento  String?  @db.VarChar(45)
+  materia String?  @db.VarChar(45)
+}
+
+model estudiante {
+  id     Int     @id
+  nombre String? @db.VarChar(45)
+}
+
+model honorarios {
+  id_honorario Int    @id @default(autoincrement())
+  minimo       Float?
+  maximo       Float?
+  porcentaje   Float?
+}
+
+model notas {
+  id        Int
+  idRubro   Int
+  idMateria Int
+  materia   String? @db.VarChar(45)
+  rubro     String? @db.VarChar(45)
+  valor     Int?
+
+  @@id([id, idRubro, idMateria])
+}
+
+model rango_timbre {
+  id_rango_timbre Int
+  minimo          Float?
+  maximo          Float?
+  valor           Float?
+  key_id          Int    @id @default(autoincrement())
+}
+
+model registro {
+  id_registro          Int             @id @default(autoincrement())
+  registro_descripcion String?         @db.VarChar(100)
+  registro_acto        registro_acto[]
+}
+
+model registro_acto {
+  registro_id_registro Int
+  acto_id_acto         Int
+  registro             registro @relation(fields: [registro_id_registro], references: [id_registro], onDelete: Cascade, map: "registro_acto_ibfk_1")
+  acto                 acto     @relation(fields: [acto_id_acto], references: [id_acto], onDelete: Cascade, map: "registro_acto_ibfk_2")
+
+  @@id([registro_id_registro, acto_id_acto])
+  @@index([acto_id_acto], map: "acto_id_acto")
+}
+
+model tarifario {
+  id_tarifa        Int     @id @default(autoincrement())
+  acto_id_acto     Int?
+  timbre_id_timbre Int?
+  porcentaje       Float   @default(1)
+  acto             acto?   @relation(fields: [acto_id_acto], references: [id_acto], onDelete: Cascade, map: "tarifario_FK_acto")
+  timbre           timbre? @relation(fields: [timbre_id_timbre], references: [id_timbre], onDelete: Cascade, map: "tarifario_FK_timbre")
+
+  @@index([acto_id_acto], map: "tarifario_FK_acto")
+  @@index([timbre_id_timbre], map: "tarifario_FK_timbre")
+}
+
+model timbre {
+  id_timbre              Int         @id @default(autoincrement())
+  timbre_descripcion     String?     @db.VarChar(100)
+  factor                 String?     @db.VarChar(3)
+  minimo                 Float?
+  multiplo               Float?
+  valor                  Float?
+  codigo                 Int
+  timbre_id_rango_timbre Int?
+  tarifario              tarifario[]
+
+  @@index([timbre_id_rango_timbre], map: "timbre_FK")
+}
+
+model users {
+  id    Int     @id @default(autoincrement())
+  name  String? @db.VarChar(50)
+  email String? @unique(map: "ix_users_email") @db.VarChar(100)
+
+  @@index([id], map: "ix_users_id")
+  @@index([name], map: "ix_users_name")
+}
+
+model usuario {
+  id       Int    @id @default(autoincrement())
+  name     String @db.VarChar(30)
+  login    String @db.VarChar(30)
+  password String @db.VarChar(30)
+  perfil   String @db.VarChar(30)
+}
+
+model valores_fijos {
+  id    Int    @id @default(autoincrement())
+  valor Float?
+}
+
+model valores_usuales {
+  id            BigInt    @id @default(autoincrement())
+  folio_1       Int?
+  pag_1         String?   @db.VarChar(100)
+  folio_2       Int?
+  pag_2         String?   @db.VarChar(100)
+  fecha         DateTime? @db.Date
+  escritura     Int?
+  tomo          Int?
+  partes        String?   @db.VarChar(200)
+  hora          Int?
+  minutos       Int?
+  contrato      String?   @db.VarChar(100)
+  entero        String?   @db.VarChar(100)
+  firmas        Int?
+  lugar         String?   @db.VarChar(100)
+  tomo_registro Int?      @default(0)
+  asiento       Int?      @default(0)
+
+  @@index([id], map: "ix_valores_usuales_id")
+}
+
+model valores_usuales_bk {
+  id        BigInt    @id @default(autoincrement())
+  lugar     String?   @db.VarChar(100)
+  folio_1   Int?
+  pag_1     String?   @db.VarChar(100)
+  folio_2   Int?
+  pag_2     String?   @db.VarChar(100)
+  fecha     DateTime? @db.Date
+  escritura Int?
+  tomo      Int?
+  partes    String?   @db.VarChar(200)
+  hora      Int?
+  minutos   Int?
+  contrato  String?   @db.VarChar(100)
+  entero    String?   @db.VarChar(100)
+  firmas    Int?
+}
+
+model variables {
+  id          Int     @id @default(autoincrement())
+  descripcion String? @db.VarChar(45)
+  valor       Float?
+}
