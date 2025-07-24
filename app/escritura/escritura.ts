@@ -6,13 +6,51 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 // Instanciamos Prisma Client
 const prisma = new PrismaClient();
 
+export type ValorUsual = {
+  id: bigint;
+  escritura: number | null;
+  folio_1: number | null;
+  pag_1: string | null;
+  folio_2: number | null;
+  pag_2: string | null;
+  fecha: Date | null;
+  tomo: number | null;
+  partes: string | null;
+  hora: number | null;
+  minutos: number | null;
+  contrato: string | null;
+  entero: string | null;
+  firmas: number | null;
+  lugar: string | null;
+  tomo_registro: number | null;
+  asiento: number | null;
+};
+
+export async function getData() {
+  try {
+    const result: ValorUsual[] = await prisma.valores_usuales.findMany({
+      orderBy: {
+        escritura: "desc",
+      },
+    });
+
+    return {
+      succesful: true,
+      data: result,
+      message: "Datos obtenidos correctamente",
+    };
+  } catch (error) {
+    return { succesful: false, message: "Error al obtener los datos" + error };
+  }
+}
+
 export async function insertValorUsual(data: {
   escritura: number;
-    folio_1: number;
+  folio_1: number;
   pag_1: string;
   folio_2: number;
   pag_2: string;
-  fecha: string; 
+  fecha: string;
   tomo: number;
   partes: string;
   hora: number;
@@ -92,7 +130,7 @@ export async function updateValorUsual(data: {
         id: BigInt(data.id),
       },
       data: {
- folio_1: Number(data.folio_1),
+        folio_1: Number(data.folio_1),
         pag_1: data.pag_1,
         folio_2: Number(data.folio_2),
         pag_2: data.pag_2,

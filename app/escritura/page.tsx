@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Spinner, TextInput, HR } from "flowbite-react";
-import { insertValorUsual, updateValorUsual, deleteValorUsual } from "./escritura"; // Estas funciones debes implementarlas para interactuar con la base de datos
+import { insertValorUsual, updateValorUsual, deleteValorUsual, getData, ValorUsual } from "./escritura"; // Estas funciones debes implementarlas para interactuar con la base de datos
+import TablasFiltros from "@/components/TablaFiltros";
 
 export default function Page() {
   // Estado para manejar el formulario
@@ -31,6 +32,47 @@ export default function Page() {
   // Estado para manejar mensajes de error o éxito
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+
+  // Estado para manejar los datos de la tabla
+  const [data, setData] = useState<ValorUsual[]>([]);
+
+  // carga los datos iniciales
+  useEffect(() => {
+
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const response = await getData(); // Debes implementar esta función para obtener los datos
+        if (response.succesful) {
+
+          if (response.data) {
+                      
+            console.log(response.data);
+            setData(response.data)
+
+          } else {
+            setData([]);
+            setErrorMessage("No hay datos disponibles.");
+          }
+
+        } else {
+          setErrorMessage(response.message);
+        }
+      } catch (error) {
+        setErrorMessage("Error al cargar los datos: " + error);
+      } finally {
+        setLoading(false);
+      }
+
+    }
+    loadData();
+
+  }, [])
+
+
+
+
 
   // Función para manejar el cambio en los campos del formulario
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,6 +117,14 @@ export default function Page() {
       setLoading(false);
     }
   };
+
+  function modifyItem(item: Record<string, unknown>, idx?: number | undefined): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function deleteItem(item: Record<string, unknown>, idx?: number | undefined): void {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <>
@@ -279,6 +329,21 @@ export default function Page() {
             {formData.id ? "Modificar Escritura" : "Registrar Escritura"}
           </Button>
         </form>
+
+        <TablasFiltros
+          data={data}
+          fields={[
+            { field: 'id', label: 'ID', defaultfilter: false },
+            { field: 'escritura', label: 'Escritura', defaultfilter: true },
+            { field: 'contrato', label: 'Contrato', defaultfilter: true },
+            { field: 'partes', label: 'Partes', defaultfilter: true },
+
+          ]}
+          itemsPerPage={5}
+          handleModifyItem={modifyItem}
+          handleDeleteItem={deleteItem}
+        />
+
         {loading && (
           <div className="mt-4 text-center text-gray-500">
             <Spinner aria-label="Loading" />
