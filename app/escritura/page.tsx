@@ -5,33 +5,38 @@ import { Button, Spinner, TextInput, HR } from "flowbite-react";
 import { insertValorUsual, updateValorUsual, deleteValorUsual, getData, ValorUsual } from "./escritura"; // Estas funciones debes implementarlas para interactuar con la base de datos
 import TablasFiltros from "@/components/TablaFiltros";
 
+
+const blankForm = {
+  id: BigInt(0),
+  folio_1: 0,
+  pag_1: "",
+  folio_2: 0,
+  pag_2: "",
+  fecha: new Date().toLocaleDateString("en-CA"), // Formato YYYY-MM-DD
+  escritura: 0,
+  tomo: 1,
+  partes: "",
+  hora: 0,
+  minutos: 0,
+  contrato: "",
+  entero: "",
+  firmas: 0,
+  lugar: "",
+  tomo_registro: 0,
+  asiento: 0,
+}
+
+
 export default function Page() {
   // Estado para manejar el formulario
-  const [formData, setFormData] = useState({
-    id: "",
-    folio_1: 0,
-    pag_1: "",
-    folio_2: 0,
-    pag_2: "",
-    fecha: new Date().toLocaleDateString("en-CA"), // Formato YYYY-MM-DD
-    escritura: 0,
-    tomo: 1,
-    partes: "",
-    hora: 0,
-    minutos: 0,
-    contrato: "",
-    entero: "",
-    firmas: 0,
-    lugar: "",
-    tomo_registro: 0,
-    asiento: 0,
-  });
+  const [formData, setFormData] = useState(blankForm);
 
   // Estado para manejar el estado de carga
   const [loading, setLoading] = useState(false);
   // Estado para manejar mensajes de error o éxito
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [openModal, setOpenModal] = useState(false);
 
 
   // Estado para manejar los datos de la tabla
@@ -47,8 +52,8 @@ export default function Page() {
         if (response.succesful) {
 
           if (response.data) {
-                      
-            console.log(response.data);
+
+
             setData(response.data)
 
           } else {
@@ -68,7 +73,7 @@ export default function Page() {
     }
     loadData();
 
-  }, [])
+  }, [openModal])
 
 
 
@@ -87,47 +92,113 @@ export default function Page() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setLoading(true);
-    setErrorMessage("");
-    setSuccessMessage("");
+    const submitter = e.nativeEvent as SubmitEvent;
+    const button = submitter.submitter as HTMLButtonElement;
+
 
     try {
-      let response;
-      if (formData.id) {
-        // Si existe un ID, se realiza una actualización o eliminación
-        if (formData.id === "delete") {
-          response = await deleteValorUsual(formData.id);
-          setSuccessMessage("Escritura eliminada exitosamente.");
-        } else {
-          response = await updateValorUsual(formData);
-          setSuccessMessage("Escritura modificada exitosamente.");
-        }
-      } else {
-        // Si no hay ID, se realiza una inserción
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        response = await insertValorUsual(formData);
-        setSuccessMessage("Escritura registrada exitosamente.");
-      }
+      if (button && button.name === 'insert') {
+        // Lógica para "Insertar"
+        await insertValorUsual(formData);
 
-      setErrorMessage("");
+        setSuccessMessage("Escritura registrada exitosamente.");
+
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 2500);
+
+      } else if (button && button.name === 'delete') {
+        // Lógica para "Borrar"
+        await deleteValorUsual(formData.id);
+        setSuccessMessage('Registro eliminado correctamente.');
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 2500);
+
+      } else {
+        if (formData.id) {
+          await updateValorUsual(formData);
+          setSuccessMessage("Escritura modificada exitosamente.")
+          setTimeout(() => {
+            setSuccessMessage("");
+          }, 2500);
+        }
+      }
     } catch (error) {
-      console.log(error)
-      setErrorMessage("Ocurrió un error al procesar la solicitud.");
+      console.error(error);
+      setErrorMessage('Ocurrió un error al procesar la solicitud.');
+
     } finally {
+      setFormData(blankForm)
       setLoading(false);
     }
+    ;
+
+
+
+
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function modifyItem(item: Record<string, unknown>, idx?: number | undefined): void {
-    throw new Error("Function not implemented.");
+
+    setFormData({
+      id: item.id as bigint,
+      folio_1: item.folio_1 as number,
+      pag_1: item.pag_1 as string,
+      folio_2: item.folio_2 as number,
+      pag_2: item.pag_2 as string,
+      fecha: new Date(item.fecha as string).toLocaleDateString("en-CA"), // Formato YYYY-MM-DD
+      escritura: item.escritura as number,
+      tomo: item.tomo as number,
+      partes: item.partes as string,
+      hora: item.hora as number,
+      minutos: item.minutos as number,
+      contrato: item.contrato as string,
+      entero: item.entero as string,
+      firmas: item.firmas as number,
+      lugar: item.lugar as string,
+      tomo_registro: item.tomo_registro as number,
+      asiento: item.asiento as number,
+    });
+
+    setOpenModal(false); // Cerrar el modal después de seleccionar un item
+
+
   }
 
-  function deleteItem(item: Record<string, unknown>, idx?: number | undefined): void {
-    throw new Error("Function not implemented.");
-  }
+
+
+
 
   return (
     <>
+
+      {openModal && (
+
+        <div className="modal fixed inset-0 bg-gray-100 bg-opacity-10 flex justify-center items-center z-50 ">
+          <div className="modal-content bg-white p-6  border-2 border-blue-800 rounded-lg shadow-lg shadow-gray-400  lg:w-1/2  lg:m-0  m-3 text-center ">
+
+            <div className="scrollable max-h-[70vh] overflow-y-auto">
+              <TablasFiltros
+                data={data}
+                fields={[
+                  { field: 'escritura', label: 'Escritura', defaultfilter: true },
+                  { field: 'contrato', label: 'Contrato', defaultfilter: true },
+                  { field: 'partes', label: 'Partes', defaultfilter: true },
+                ]}
+                itemsPerPage={5}
+                handleModifyItem={modifyItem}
+              />
+            </div>
+
+
+            <button className="close-btn bg-red-500 text-white py-2 px-4 rounded mt-4 hover:bg-red-600"
+              onClick={() => setOpenModal(false)}>Cerrar</button>
+          </div>
+        </div>
+      )}
+
       <div className="md:w-1/2  w-[95%]   mx-auto mt-10 p-3 bg-white border-2 border-blue-800 rounded-lg shadow-lg shadow-gray-400">
         <h1 className="text-2xl font-bold text-left mb-6">Registro de Escritura</h1>
 
@@ -145,16 +216,24 @@ export default function Page() {
                 required
               />
             </div>
-            <div className="flex-1">
-              <label htmlFor="escritura" className="block text-gray-700 mb-2">Escritura</label>
-              <TextInput
-                id="escritura"
-                type="number"
-                name="escritura"
-                value={formData.escritura}
-                onChange={handleChange}
-                required
-              />
+            <div className=" flex flex-row flex-1">
+              <div className="flex-1">
+                <label htmlFor="escritura" className="block text-gray-700 mb-2">Escritura</label>
+                <TextInput
+                  id="escritura"
+                  type="number"
+                  name="escritura"
+                  value={formData.escritura}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <span className="ml-2 flex items-end">
+                <Button
+                  onClick={() => setOpenModal(true)}>
+                  <span className="text-xs">Buscar</span>
+                </Button>
+              </span>
             </div>
 
 
@@ -325,24 +404,45 @@ export default function Page() {
 
           </div>
 
-          <Button type="submit" className="w-full">
-            {formData.id ? "Modificar Escritura" : "Registrar Escritura"}
-          </Button>
+          <div className="flex flex-row gap-4 justify-center">
+
+            {!(formData.id) && (
+              <Button
+                name="insert"
+                type="submit"
+                className="">
+                Registrar Escritura
+              </Button>
+            )}
+            {formData.id && (<>
+
+              <Button
+                name="modify"
+                type="submit"
+                className=""
+              >
+                Modificar Escritura
+              </Button>
+
+              <Button
+                name="delete"
+                type="submit"
+                className=""
+                color={"red"} >
+                Eliminar Escritura
+              </Button>
+            </>
+            )}
+            <Button
+              onClick={() => setFormData(blankForm)}
+            >
+              Cancelar
+            </Button>
+          </div>
+
+
         </form>
 
-        <TablasFiltros
-          data={data}
-          fields={[
-            { field: 'id', label: 'ID', defaultfilter: false },
-            { field: 'escritura', label: 'Escritura', defaultfilter: true },
-            { field: 'contrato', label: 'Contrato', defaultfilter: true },
-            { field: 'partes', label: 'Partes', defaultfilter: true },
-
-          ]}
-          itemsPerPage={5}
-          handleModifyItem={modifyItem}
-          handleDeleteItem={deleteItem}
-        />
 
         {loading && (
           <div className="mt-4 text-center text-gray-500">
@@ -358,7 +458,7 @@ export default function Page() {
         {successMessage && (
           <div className="mt-4 text-green-500 text-center">{successMessage}</div>
         )}
-      </div>
+      </div >
     </>
   );
 }

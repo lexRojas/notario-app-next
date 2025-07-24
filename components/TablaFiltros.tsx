@@ -1,8 +1,7 @@
 'use client'
 
 import { customThemeTableHead, customThemePagination } from "@/scripts/themes";
-import { TextInput, Select, Table, Pagination, Checkbox, ThemeProvider, TableHead, TableHeadCell, TableBody, TableCell, TableRow } from "flowbite-react"
-import { IconEdit, IconDelete } from "@/icons/icons/Icons";
+import { TextInput, Select, Table, Pagination, Checkbox, ThemeProvider, TableHead, TableHeadCell, TableBody, TableCell, TableRow, Button } from "flowbite-react"
 import { ChangeEvent, useState, useEffect } from "react"
 import { getFormateDate, } from "@/scripts/tools"
 
@@ -13,12 +12,11 @@ type TablasFiltrosProps<T extends Record<string, unknown>> = {
     fields: { field: string; label: string, defaultfilter: boolean }[];
     itemsPerPage: number;
     handleModifyItem: (item: T, idx?: number) => void,
-    handleDeleteItem: (item: T, idx?: number) => void,
 }
 
 export default function TablasFiltros<T extends Record<string, unknown>>(props: TablasFiltrosProps<T>) {
 
-    const { data, fields, itemsPerPage, handleModifyItem, handleDeleteItem } = props
+    const { data, fields, itemsPerPage, handleModifyItem } = props
 
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -164,10 +162,13 @@ export default function TablasFiltros<T extends Record<string, unknown>>(props: 
 
 
                                     )}
-                                    <TableCell className="flex justify-center">
-                                        <div className="flex justify-between gap-1">
-                                            <IconEdit onClick={() => handleModifyItem(value, index + ((currentPage - 1) * itemsPerPage))} className="cursor-pointer" height={15} />
-                                            <IconDelete onClick={() => handleDeleteItem(value, index + ((currentPage - 1) * itemsPerPage))} className="cursor-pointer" height={15} />
+                                    <TableCell className="flex justify-center ">
+                                        <div className="flex justify-between  gap-1">
+                                            {/* <IconEdit onClick={() => handleModifyItem(value, index + ((currentPage - 1) * itemsPerPage))} className="cursor-pointer" height={15} />
+                                            <IconDelete onClick={() => handleDeleteItem(value, index + ((currentPage - 1) * itemsPerPage))} className="cursor-pointer" height={15} /> */}
+                                            <Button onClick={() => handleModifyItem(value, index + ((currentPage - 1) * itemsPerPage))} className=" cursor-pointer" color="blue" size="xs">
+                                                Seleccionar
+                                            </Button>
                                         </div>
                                     </TableCell>
                                 </TableRow>

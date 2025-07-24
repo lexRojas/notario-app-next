@@ -106,7 +106,7 @@ export async function insertValorUsual(data: {
 
 // Función para actualizar un registro existente
 export async function updateValorUsual(data: {
-  id: string;
+  id: bigint | null;
   folio_1: number;
   pag_1: string;
   folio_2: number;
@@ -127,7 +127,7 @@ export async function updateValorUsual(data: {
   try {
     const result = await prisma.valores_usuales.update({
       where: {
-        id: BigInt(data.id),
+        id: BigInt(data.id!),
       },
       data: {
         folio_1: Number(data.folio_1),
@@ -158,7 +158,7 @@ export async function updateValorUsual(data: {
 }
 
 // Función para eliminar un registro existente
-export async function deleteValorUsual(id: string) {
+export async function deleteValorUsual(id: bigint) {
   try {
     const result = await prisma.valores_usuales.delete({
       where: {
