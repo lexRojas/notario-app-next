@@ -62,12 +62,14 @@ export default function Page() {
         }
       } else {
         // Si no hay ID, se realiza una inserción
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         response = await insertValorUsual(formData);
         setSuccessMessage("Escritura registrada exitosamente.");
       }
 
       setErrorMessage("");
     } catch (error) {
+      console.log(error)
       setErrorMessage("Ocurrió un error al procesar la solicitud.");
     } finally {
       setLoading(false);

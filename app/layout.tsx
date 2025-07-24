@@ -21,7 +21,7 @@ export default function RootLayout({
       <head>
         <ThemeModeScript />
         <style>
-          @import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Love+Ya+Like+A+Sister&family=Ms+Madi&family=Tauri&display=swap');
+          @import url(&quot;https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Love+Ya+Like+A+Sister&family=Ms+Madi&family=Tauri&display=swap&quot;);
         </style>
       </head>
       <body
