@@ -24,7 +24,7 @@ type Timbre = {
   multiplo: number | null;
   valor: number | null;
   codigo: number;
-  timbre_id_rango_timbre: any;
+  timbre_id_rango_timbre: unknown;
   tarifario: Tarifario[];
 };
 
