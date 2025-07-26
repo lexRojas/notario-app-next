@@ -1,0 +1,37 @@
+/* Archivo CSS */
+
+.icon-add {
+  transition: stroke 0.3s ease; /* Añadimos transición para un cambio suave */
+  stroke: #117404;
+}
+
+.icon-add:hover path {
+  stroke: #080808; /* El color que desees cuando el mouse esté sobre el icono */
+  box-shadow: #117404 0px 0px 10px; /* Añadimos un efecto de sombra */
+  filter: drop-shadow(0 0 5px #117404); /* Añadimos un efecto de sombra */
+  transform: scale(1.1); /* Añadimos un efecto de escala */
+}
+
+.icon-modify {
+  transition: stroke 0.3s ease; /* Añadimos transición para un cambio suave */
+  stroke: #050052;
+}
+
+.icon-modify:hover path {
+  stroke: #fc6602; /* El color que desees cuando el mouse esté sobre el icono */
+  box-shadow: #252725 0px 0px 10px; /* Añadimos un efecto de sombra */
+  filter: drop-shadow(0 0 5px #000000); /* Añadimos un efecto de sombra */
+  transform: scale(1.1); /* Añadimos un efecto de escala */
+}
+
+.icon-delete {
+  transition: stroke 0.3s ease; /* Añadimos transición para un cambio suave */
+  stroke: #da0b0b;
+}
+
+.icon-delete:hover path {
+  stroke: #3a3737; /* El color que desees cuando el mouse esté sobre el icono */
+  box-shadow: #117404 0px 0px 10px; /* Añadimos un efecto de sombra */
+  filter: drop-shadow(0 0 5px #117404); /* Añadimos un efecto de sombra */
+  transform: scale(1.1); /* Añadimos un efecto de escala */
+}

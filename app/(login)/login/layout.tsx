@@ -1,7 +1,7 @@
 import { ThemeModeScript } from "flowbite-react";
 import type { Metadata } from "next";
-import { ThemeInit } from "../.flowbite-react/init";
-import "./globals.css";
+import { ThemeInit } from "../../../.flowbite-react/init";
+import "@/app/globals.css";
 import { geistMono, geistSans } from "@/fonts/fonts";
 
 

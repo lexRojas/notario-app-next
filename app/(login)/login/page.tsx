@@ -3,12 +3,16 @@
 import { useState } from "react";
 import { Button, HR, Spinner, TextInput } from "flowbite-react";
 import { getUserByUsername } from "./login";
+import { useRouter } from "next/navigation";
 
 
 
 
 
 export default function Page() {
+
+
+  const navegate = useRouter();
 
   // Estado para manejar mensaje de error
   const [errorMessage, setErrorMessage] = useState("");
@@ -46,6 +50,7 @@ export default function Page() {
 
     if (res.susseful) {
       setSuccess(true);
+      navegate.push("/");
       setErrorMessage("");
     } else {
       setErrorMessage("Usuario o contraseña incorrectos");

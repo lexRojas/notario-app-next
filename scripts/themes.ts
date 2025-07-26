@@ -2,17 +2,48 @@ import { createTheme } from "flowbite-react";
 
 export const customThemeTableHead = createTheme({
   table: {
+    // root: {
+    //   base: "w-full text-left text-sm text-gray-500 dark:text-gray-400",
+    //   shadow:
+    //     "absolute top-0 left-0 -z-10 h-full w-full rounded-lg bg-white drop-shadow-md dark:bg-black",
+    //   wrapper: "relative",
+    // },
+    // body: {
+    //   base: "group/body",
+    //   cell: {
+    //     base: "px-3 py-1",
+    //   },
+    // },
+    // head: {
+    //   base: "group/head text-xs text-gray-100 uppercase dark:text-gray-700",
+    //   cell: {
+    //     base: "bg-gray-300 px-6 py-2 group-first/head:first:rounded-tl-lg group-first/head:last:rounded-tr-lg dark:bg-yellow-100",
+    //   },
+    // },
+
+    root: {
+      base: "w-full border border-gray-300 text-left text-sm text-gray-500 dark:border-gray-600 dark:text-gray-400",
+      shadow:
+        "absolute top-0 left-0 -z-10 h-full w-full bg-white drop-shadow-md dark:bg-black",
+      wrapper: "relative",
+    },
     body: {
       base: "group/body",
       cell: {
-        base: "px-3 py-1",
+        base: "border-gray-200 px-6 py-4 dark:border-gray-600",
       },
     },
     head: {
-      base: "group/head text-xs text-gray-100 uppercase dark:text-gray-700",
+      base: "group/head text-xs text-gray-700 uppercase dark:text-gray-400",
       cell: {
-        base: "bg-gray-300 px-6 py-2 group-first/head:first:rounded-tl-lg group-first/head:last:rounded-tr-lg dark:bg-yellow-100",
+        base: "border border-gray-200 bg-blue-500 px-6 py-3 dark:border-gray-600 dark:bg-gray-700",
       },
+    },
+    row: {
+      base: "group/row border border-gray-200 dark:border-gray-600",
+      hovered: "hover:bg-gray-50 dark:hover:bg-gray-600",
+      striped:
+        "odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700",
     },
   },
 });

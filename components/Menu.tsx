@@ -27,12 +27,12 @@ export function MenuPrincipal() {
                     <div>
                         <ul >
                             <li>
-                                <Link href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
+                                <Link href="/escritura" className="hover:text-primary-600 dark:hover:text-primary-500">
                                     Escrituras
                                 </Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
+                                <Link href="/registro" className="hover:text-primary-600 dark:hover:text-primary-500">
                                     Registro
                                 </Link>
                             </li>

@@ -9,3 +9,27 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.table-container {
+  @apply relative overflow-hidden shadow-md;
+}
+
+table {
+  @apply w-full table-fixed text-left;
+}
+
+thead {
+  @apply bg-[#002671] text-white uppercase;
+}
+
+tr {
+  @apply py-1;
+}
+
+td {
+  @apply border border-gray-300 p-4 py-1 text-center font-bold;
+}
+
+tbody {
+  @apply bg-[#fefff4] text-gray-500;
+}
