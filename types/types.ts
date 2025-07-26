@@ -1,22 +1,22 @@
-type Acto = {
+export type Acto = {
   id_acto: number;
   acto_descripcion: string | null;
   porcentaje_tarifa: number | null;
 };
 
-type RegistroActo = {
+export type RegistroActo = {
   registro_id_registro: number;
   acto_id_acto: number | null;
   acto: Acto | null;
 };
 
-type Registro = {
+export type Registro = {
   id_registro: number;
   registro_descripcion: string | null;
   registro_acto: RegistroActo[];
 };
 
-type Timbre = {
+export type Timbre = {
   id_timbre: number;
   timbre_descripcion: string | null;
   factor: string | null;
@@ -28,7 +28,7 @@ type Timbre = {
   tarifario: Tarifario[];
 };
 
-type ActoTarifa = {
+export type ActoTarifa = {
   id_tarifa: number;
   acto_id_acto: number | null;
   timbre_id_timbre: number | null;
@@ -37,7 +37,7 @@ type ActoTarifa = {
   timbre: Timbre | null;
 };
 
-type Tarifario = {
+export type Tarifario = {
   id_tarifa: number;
   acto_id_acto: number | null;
   timbre_id_timbre: number | null;
