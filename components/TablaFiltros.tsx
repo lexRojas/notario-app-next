@@ -16,7 +16,7 @@ type TablasFiltrosProps<T extends Record<string, unknown>> = {
     handleModifyItem: (item: T, idx?: number) => void,
 }
 
-export default function TablasFiltros<T extends Record<string, unknown>>(props: TablasFiltrosProps<T>) {
+export default function TablasFiltros<T extends Record<string, any>>(props: TablasFiltrosProps<T>) {
 
     const { data, fields, itemsPerPage, handleModifyItem } = props
 

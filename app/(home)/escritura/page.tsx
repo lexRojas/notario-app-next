@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { Button, Spinner, TextInput, HR } from "flowbite-react";
-import { insertValorUsual, updateValorUsual, deleteValorUsual, getData, ValorUsual } from "./escritura"; // Estas funciones debes implementarlas para interactuar con la base de datos
+import { insertValorUsual, updateValorUsual, deleteValorUsual, getData } from "./escritura"; // Estas funciones debes implementarlas para interactuar con la base de datos
 import TablasFiltros from "@/components/TablaFiltros";
+import { ValorUsual } from "@/types/types";
 
 
 const blankForm = {
-  id: BigInt(0),
+  id: 0,
   folio_1: 0,
   pag_1: "",
   folio_2: 0,
@@ -139,11 +140,11 @@ export default function Page() {
 
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function modifyItem(item: Record<string, unknown>, idx?: number | undefined): void {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+  function modifyItem(item: Record<string, any>, idx?: number | undefined): void {
 
     setFormData({
-      id: item.id as bigint,
+      id: item.id as number,
       folio_1: item.folio_1 as number,
       pag_1: item.pag_1 as string,
       folio_2: item.folio_2 as number,
@@ -180,8 +181,8 @@ export default function Page() {
           <div className="modal-content bg-white p-6  border-2 border-blue-800 rounded-lg shadow-lg shadow-gray-400  lg:w-1/2  lg:m-0  m-3 text-center ">
 
             <div className="scrollable max-h-[70vh] overflow-y-auto">
-              <TablasFiltros
-                data={data}
+              <TablasFiltros<ValorUsual>
+                data={data as ValorUsual[]}
                 fields={[
                   { field: 'escritura', label: 'Escritura', defaultfilter: true },
                   { field: 'contrato', label: 'Contrato', defaultfilter: true },
