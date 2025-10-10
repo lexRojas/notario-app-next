@@ -154,12 +154,12 @@ export default function Indice() {
                     <label htmlFor="nota" className="block text-sm font-medium text-gray-700">
                         Nota
                     </label>
-                    <textarea
+                    <input
                         id="nota"
                         name="nota"
                         value={formData.nota}
                         onChange={handleInputChange}
-                        rows={4}
+
                         className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                     />
                 </div>
