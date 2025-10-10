@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client'
 
 import { customThemeTableHead, customThemePagination } from "@/scripts/themes";
@@ -124,12 +126,12 @@ export default function TablasFiltros<T extends Record<string, unknown>>(props: 
                                 {fields.map((field, idx) => (
                                     <TableHeadCell className="text-center" key={idx}>{field.label}</TableHeadCell>
                                 ))}
-                                <TableHeadCell>Acciones</TableHeadCell>
                             </TableRow>
                         </TableHead>
                         <TableBody className="divide-y">
                             {currentData.map((value, index) => (
-                                <TableRow key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                <TableRow key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800 cursor-pointer"
+                                    onClick={() => handleModifyItem(value, index + ((currentPage - 1) * itemsPerPage))} >
                                     {fields.map((field, idx) => {
                                         const cellValue = value[field.field] as Date | string | boolean | number;
                                         const esFecha = isValidDate(cellValue)
@@ -162,15 +164,6 @@ export default function TablasFiltros<T extends Record<string, unknown>>(props: 
 
 
                                     )}
-                                    <TableCell className="flex justify-center ">
-                                        <div className="flex justify-between  gap-1">
-                                            {/* <IconEdit onClick={() => handleModifyItem(value, index + ((currentPage - 1) * itemsPerPage))} className="cursor-pointer" height={15} />
-                                            <IconDelete onClick={() => handleDeleteItem(value, index + ((currentPage - 1) * itemsPerPage))} className="cursor-pointer" height={15} /> */}
-                                            <Button onClick={() => handleModifyItem(value, index + ((currentPage - 1) * itemsPerPage))} className=" cursor-pointer" color="blue" size="xs">
-                                                Seleccionar
-                                            </Button>
-                                        </div>
-                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

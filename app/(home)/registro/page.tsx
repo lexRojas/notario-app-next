@@ -1,16 +1,23 @@
+
+/* eslint-disable */
+
 'use client';
+
+
+
 
 import { useEffect, useState } from "react";
 import { Spinner, HR, } from "flowbite-react";
-import { obtenerDatosCompletos } from "./registro";
+import { addRegistro, obtenerDatosCompletos } from "./registro";
 
 
 
 import "@/styles/Icons_estilos.css"; // Asegúrate de que este archivo exista y tenga los estilos necesarios
 
 
-import { JSONData } from "@/types/types";
-import RegistroTable from "@/components/RegistrosTable";
+import { CustomListValue, JSONData, JsonResponse, RegistroActo } from "@/types/types";
+import ActosTable from "@/components/ActosTable";
+import CustomList from "@/components/CustomList";
 
 
 // Estructura del formulario inicial
@@ -22,6 +29,14 @@ export default function Page() {
 
     // Datos iniciales
     const [data, setData] = useState<JSONData>();
+
+    // Datos del registro de actos 
+    const [dataActos, setDataActos] = useState<RegistroActo[]>();
+
+    // Datos iniciales lista Registro 
+    const [listValuesRegistro, setListValuesRegistro] = useState<CustomListValue[]>();
+
+
 
     // Estado para manejar el estado de carga
     const [loading, setLoading] = useState(false);
@@ -37,7 +52,19 @@ export default function Page() {
         const loadData = async () => {
             const datos: JSONData = await obtenerDatosCompletos();
             if (datos) {
-                console.log(datos);
+
+
+                const newValuesRegistro: CustomListValue[] = datos.registros.map((valor) => {
+                    return (
+                        {
+                            id: valor.id_registro,
+                            descripcion: valor.registro_descripcion
+                        }
+                    )
+
+                })
+
+                setListValuesRegistro(newValuesRegistro)
                 setData(datos);
             } else {
                 setErrorMessage("No se pudieron cargar los datos.");
@@ -51,7 +78,36 @@ export default function Page() {
     }, [])
 
 
+    const registro_handleSelectItem = (index: number, value: CustomListValue) => {
 
+
+    }
+
+    const registro_handleAddItem = (value: CustomListValue): JsonResponse => {
+
+
+
+
+
+
+        // const result = await addRegistro(value.descripcion ?? "")
+
+        // if (result) {
+
+        //     return { succesful: true, id: result.id_registro }
+
+        // } else {
+        //     return { error: "no se pudo" }
+        // }
+
+
+    }
+    const registro_handleModifyItem = (value: CustomListValue) => {
+
+    }
+    const registro_handleDeleteItem = (value: CustomListValue) => {
+
+    }
 
 
 
@@ -73,13 +129,20 @@ export default function Page() {
                         {/* Seccion de  Registro y Actos Notariales */}
 
                         <div className="flex flex-1 flex-col gap-4 mb-4">
-                            <RegistroTable
-                                data={data?.registros}
+                            <CustomList
+                                data={listValuesRegistro}
+                                handleSelectItem={registro_handleSelectItem}
+                                handleAddItem={registro_handleAddItem}
+                                handleDeleteItem={registro_handleDeleteItem}
+                                handleModifyItem={registro_handleModifyItem}
+                                title="Registros"
+
                             />
                         </div>
 
-                        <div className="flex flex-1 flex-col gap-4 mb-4 bg-amber-200">
-                            <p>Lista 2</p>
+                        <div className="flex flex-1 flex-col gap-4 mb-4">
+
+                            {/**aqui va la lista de actos */}
                         </div>
                     </div >
 

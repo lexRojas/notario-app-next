@@ -117,7 +117,7 @@ model valores_fijos {
 }
 
 model valores_usuales {
-  id            BigInt    @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   folio_1       Int?
   pag_1         String?   @db.VarChar(100)
   folio_2       Int?
@@ -139,7 +139,7 @@ model valores_usuales {
 }
 
 model valores_usuales_bk {
-  id        BigInt    @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   lugar     String?   @db.VarChar(100)
   folio_1   Int?
   pag_1     String?   @db.VarChar(100)

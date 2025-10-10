@@ -1,9 +1,11 @@
 "use server";
 
 import { PrismaClient } from "@prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/binary";
 
 const prisma = new PrismaClient();
 
+// Metodo para obtener Registros y Tarifarios
 export async function obtenerDatosCompletos() {
   const registros = await prisma.registro.findMany({
     include: {
@@ -34,4 +36,34 @@ export async function obtenerDatosCompletos() {
 
   // Puedes devolver un objeto que contenga ambas consultas
   return { registros, tarifarios };
+}
+
+// Metodo para insertar REGISTROS
+
+export async function addRegistro(value: string) {
+  try {
+    const result = await prisma.registro.create({
+      data: {
+        registro_descripcion: value,
+      },
+    });
+
+    return result;
+  } catch (error) {
+    if (error instanceof PrismaClientKnownRequestError) {
+      // Error conocido de Prisma
+      console.error(
+        `Error de Prisma (código: ${error.code}): ${error.message}`,
+      );
+      throw new Error(`Error de base de datos: ${error.message}`);
+    } else {
+      // Error desconocido
+      console.error("Error desconocido al insertar el registro:", error);
+      throw new Error(
+        "Ocurrió un error inesperado. No se pudo insertar el registro.",
+      );
+    }
+  } finally {
+    await prisma.$disconnect();
+  }
 }

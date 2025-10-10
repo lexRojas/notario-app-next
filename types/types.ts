@@ -48,3 +48,34 @@ export type JSONData = {
   registros: Registro[];
   tarifarios: ActoTarifa[];
 };
+
+export type CustomListValue = {
+  id: number;
+  descripcion: string | null;
+};
+
+export interface JsonResponse {
+  succesful: boolean;
+  id: number;
+  error: string;
+}
+
+export interface ValorUsual {
+  id: number;
+  escritura: number | null;
+  folio_1: number | null;
+  pag_1: string | null;
+  folio_2: number | null;
+  pag_2: string | null;
+  fecha: Date | null;
+  tomo: number | null;
+  partes: string | null;
+  hora: number | null;
+  minutos: number | null;
+  contrato: string | null;
+  entero: string | null;
+  firmas: number | null;
+  lugar: string | null;
+  tomo_registro: number | null;
+  asiento: number | null;
+}

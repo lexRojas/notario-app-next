@@ -1,26 +1,26 @@
 'use client'
 
 import { IconAdd, IconEdit, IconDelete } from "@/icons/icons/Icons"
-import { Registro } from "@/types/types"
+import { RegistroActo } from "@/types/types"
 import { TextInput } from "flowbite-react"
 import { useState } from "react"
 
 
 
-type propsRegistroTable = {
+type propsActosTable = {
 
-    data: Registro[] | undefined
-
+    data: RegistroActo[] | undefined,
+    handleResolve: (index: number, value: RegistroActo) => void
 
 
 }
 
-export default function RegistroTable(
-    props: propsRegistroTable
+export default function ActosTable(
+    props: propsActosTable
 ) {
 
 
-    const { data } = props
+    const { data, handleResolve } = props
 
     // Estado para manejar el formulario
     const [formData, setFormData] = useState([]);
@@ -36,8 +36,9 @@ export default function RegistroTable(
     };
 
     // Estado para manejar la fila seleccionada
-    const handleRowClick = (rowIndex: number) => {
+    const handleRowClick = (rowIndex: number, value: RegistroActo) => {
         setSelectedRow(rowIndex);
+        handleResolve(rowIndex, value)
 
     };
 
@@ -85,14 +86,14 @@ export default function RegistroTable(
                     </thead>
                     <tbody >
 
-                        {data?.map((registro, index) => (
+                        {data?.map((acto, index) => (
                             <tr
-                                key={registro.id_registro}
+                                key={acto.acto_id_acto}
                                 className={`cursor-pointer ${selectedRow === index ? 'bg-gray-300' : ''}`}
-                                onClick={() => handleRowClick(index)}
+                                onClick={() => handleRowClick(index, acto)}
                             >
-                                <td>{registro.id_registro}</td>
-                                <td >{registro.registro_descripcion}</td>
+                                <td>{acto.acto?.id_acto}</td>
+                                <td >{acto.acto?.acto_descripcion}</td>
                             </tr>
                         )
                         )}

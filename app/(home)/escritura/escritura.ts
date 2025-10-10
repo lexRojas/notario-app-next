@@ -1,30 +1,12 @@
 "use server";
 
+import { ValorUsual } from "@/types/types";
 import { PrismaClient } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 // Instanciamos Prisma Client
 const prisma = new PrismaClient();
 
-export type ValorUsual = {
-  id: bigint;
-  escritura: number | null;
-  folio_1: number | null;
-  pag_1: string | null;
-  folio_2: number | null;
-  pag_2: string | null;
-  fecha: Date | null;
-  tomo: number | null;
-  partes: string | null;
-  hora: number | null;
-  minutos: number | null;
-  contrato: string | null;
-  entero: string | null;
-  firmas: number | null;
-  lugar: string | null;
-  tomo_registro: number | null;
-  asiento: number | null;
-};
 
 export async function getData() {
   try {

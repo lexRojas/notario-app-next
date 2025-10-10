@@ -82,7 +82,21 @@ export function MenuPrincipal() {
                     </ul>
 
                 </MegaMenuDropdown>
+                {/* Menú "Cálculos" */}
 
+                <MegaMenuDropdown toggle={<>Reportes</>}>
+
+                    <ul className="grid grid-cols-2">
+                        <div className="space-y-4 p-4">
+                            <li>
+                                <Link href="/reportes/indice" className="hover:text-primary-600 dark:hover:text-primary-500">
+                                    Indice Notarial
+                                </Link>
+                            </li>
+                        </div>
+                    </ul>
+
+                </MegaMenuDropdown>
 
                 {/* Menú "Acerca de" */}
                 <NavbarLink href="#">Acerca de</NavbarLink>
