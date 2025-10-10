@@ -83,25 +83,25 @@ export default function Page() {
 
     }
 
-    const registro_handleAddItem = (value: CustomListValue): JsonResponse => {
+    // const registro_handleAddItem = (value: CustomListValue): JsonResponse => {
 
 
 
 
 
 
-        // const result = await addRegistro(value.descripcion ?? "")
+    //     // const result = await addRegistro(value.descripcion ?? "")
 
-        // if (result) {
+    //     // if (result) {
 
-        //     return { succesful: true, id: result.id_registro }
+    //     //     return { succesful: true, id: result.id_registro }
 
-        // } else {
-        //     return { error: "no se pudo" }
-        // }
+    //     // } else {
+    //     //     return { error: "no se pudo" }
+    //     // }
 
 
-    }
+    // }
     const registro_handleModifyItem = (value: CustomListValue) => {
 
     }
@@ -129,15 +129,15 @@ export default function Page() {
                         {/* Seccion de  Registro y Actos Notariales */}
 
                         <div className="flex flex-1 flex-col gap-4 mb-4">
-                            <CustomList
+                            {/* <CustomList
                                 data={listValuesRegistro}
                                 handleSelectItem={registro_handleSelectItem}
-                                handleAddItem={registro_handleAddItem}
-                                handleDeleteItem={registro_handleDeleteItem}
-                                handleModifyItem={registro_handleModifyItem}
+                 
+                                handleDeleteItem={ }
+                                handleModifyItem={ }
                                 title="Registros"
 
-                            />
+                            /> */}
                         </div>
 
                         <div className="flex flex-1 flex-col gap-4 mb-4">
