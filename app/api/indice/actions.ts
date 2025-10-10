@@ -101,13 +101,13 @@ export const getIndice = async (
     const data: ValorUsual[] = await prisma.valores_usuales.findMany({
       where: {
         fecha: {
-          gte: new Date(inicio),
-          lte: new Date(fin),
+          gte: inicio,
+          lte: fin,
         },
       },
 
       orderBy: {
-        escritura: "desc",
+        escritura: "asc",
       },
     });
 
@@ -121,10 +121,8 @@ export const getIndice = async (
 
     const newData = data.map((item) => ({
       ...item,
-      fecha: item.fecha!.toLocaleDateString("es-ES", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
+      fecha: new Date(item.fecha!).toLocaleDateString("es-CR", {
+        timeZone: "America/Costa_Rica",
       }),
     }));
 

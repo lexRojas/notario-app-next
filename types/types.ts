@@ -67,7 +67,7 @@ export interface ValorUsual {
   pag_1: string | null;
   folio_2: number | null;
   pag_2: string | null;
-  fecha: Date | null;
+  fecha: string | null;
   tomo: number | null;
   partes: string | null;
   hora: number | null;

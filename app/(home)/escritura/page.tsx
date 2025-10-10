@@ -149,7 +149,7 @@ export default function Page() {
       pag_1: item.pag_1 as string,
       folio_2: item.folio_2 as number,
       pag_2: item.pag_2 as string,
-      fecha: new Date(item.fecha as string).toLocaleDateString("en-CA"), // Formato YYYY-MM-DD
+      fecha: item.fecha,
       escritura: item.escritura as number,
       tomo: item.tomo as number,
       partes: item.partes as string,

@@ -117,23 +117,23 @@ model valores_fijos {
 }
 
 model valores_usuales {
-  id            Int       @id @default(autoincrement())
+  id            Int     @id @default(autoincrement())
   folio_1       Int?
-  pag_1         String?   @db.VarChar(100)
+  pag_1         String? @db.VarChar(10)
   folio_2       Int?
-  pag_2         String?   @db.VarChar(100)
-  fecha         DateTime? @db.Date
+  pag_2         String? @db.VarChar(10)
+  fecha         String? @db.VarChar(10)
   escritura     Int?
   tomo          Int?
-  partes        String?   @db.VarChar(200)
+  partes        String? @db.VarChar(200)
   hora          Int?
   minutos       Int?
-  contrato      String?   @db.VarChar(100)
-  entero        String?   @db.VarChar(100)
+  contrato      String? @db.VarChar(100)
+  entero        String? @db.VarChar(100)
   firmas        Int?
-  lugar         String?   @db.VarChar(100)
-  tomo_registro Int?      @default(0)
-  asiento       Int?      @default(0)
+  lugar         String? @db.VarChar(100)
+  tomo_registro Int?    @default(0)
+  asiento       Int?    @default(0)
 
   @@index([id], map: "ix_valores_usuales_id")
 }
