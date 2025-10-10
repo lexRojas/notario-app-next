@@ -39,7 +39,7 @@ export default function Indice() {
         // Llamada a la función getIndice con los datos del formulario
         const data = await getIndice(formData);
 
-        await generateReport("887d98c2d75a2e30ea39222817a7d67f09605e11fada2f84c1ad661673f2af8b", data)
+        await generateReport("5581a6d054fa7a499a4bb6efa3863985ba0c5c3d5b6a23c9a06b5122dcfc5bba", data)
 
 
     };
