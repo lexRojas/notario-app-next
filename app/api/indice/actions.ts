@@ -12,7 +12,25 @@ interface indiceTemplate {
   carnet: number;
   fecha: string;
   nota: string;
-  data: ValorUsual[];
+  data: {
+    id: number;
+    escritura: number | null;
+    folio_1: number | null;
+    pag_1: string | null;
+    folio_2: number | null;
+    pag_2: string | null;
+    fecha: string | null;
+    tomo: number | null;
+    partes: string | null;
+    hora: number | null;
+    minutos: number | null;
+    contrato: string | null;
+    entero: string | null;
+    firmas: number | null;
+    lugar: string | null;
+    tomo_registro: number | null;
+    asiento: number | null;
+  }[];
 }
 
 interface inputProps {
@@ -67,8 +85,6 @@ const obtenerFechasQuincena = (
   return { inicio, fin };
 };
 
-
-
 export const getIndice = async (
   values: inputProps,
 ): Promise<indiceTemplate | null> => {
@@ -103,6 +119,15 @@ export const getIndice = async (
       mensaje = "-- NO CARTULE ESTA QUINCENA -- / ULTIMA LINEA --";
     }
 
+    const newData = data.map((item) => ({
+      ...item,
+      fecha: item.fecha!.toLocaleDateString("es-ES", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      }),
+    }));
+
     const result: indiceTemplate = {
       mensaje: mensaje,
       quincena: quincena,
@@ -112,7 +137,7 @@ export const getIndice = async (
       carnet: carnet,
       fecha: fecha,
       nota: nota,
-      data: data,
+      data: newData,
     };
 
     console.log(result);

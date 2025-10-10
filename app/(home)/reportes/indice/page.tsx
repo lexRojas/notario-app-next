@@ -13,7 +13,13 @@ export default function Indice() {
         ano: 2025,
         notario: "RODRIGO ROJAS CHAVES",
         carnet: 25794,
-        fecha: "2025-07-10",
+        fecha: new Date().toLocaleDateString("es-CR", {
+            weekday: "long",  // Día de la semana completo
+            year: "numeric",  // Año completo
+            month: "long",    // Mes completo
+            day: "numeric",   // Día numérico
+            timeZone: "America/Costa_Rica"
+        }), // Formato YYYY-MM-DD
         nota: "",
     });
 
@@ -33,7 +39,7 @@ export default function Indice() {
         // Llamada a la función getIndice con los datos del formulario
         const data = await getIndice(formData);
 
-        await generateReport("b48f31add39093280261aa1d4b755bb4af45dfb90ac00de2c4ec97a7cd2465da", data)
+        await generateReport("887d98c2d75a2e30ea39222817a7d67f09605e11fada2f84c1ad661673f2af8b", data)
 
 
     };
@@ -134,20 +140,7 @@ export default function Indice() {
                     />
                 </div>
 
-                {/* Fecha */}
-                <div>
-                    <label htmlFor="fecha" className="block text-sm font-medium text-gray-700">
-                        Fecha
-                    </label>
-                    <input
-                        type="date"
-                        id="fecha"
-                        name="fecha"
-                        value={formData.fecha}
-                        onChange={handleInputChange}
-                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    />
-                </div>
+
 
                 {/* Nota */}
                 <div>

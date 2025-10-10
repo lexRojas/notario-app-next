@@ -23,16 +23,22 @@ export async function POST(req: Request) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Accept-Language": "es-ES",
+
           Authorization: `Bearer ${CARBONE_API_KEY}`,
         },
-        body: JSON.stringify({ data: data, convertTo: "pdf" }),
-      }
+        body: JSON.stringify({
+          data: data,
+          convertTo: "pdf",
+          location: "es-ES",
+        }),
+      },
     );
 
     if (!renderResponse.ok) {
       const errorText = await renderResponse.text();
       throw new Error(
-        `Carbone API Error (${renderResponse.status}): ${errorText}`
+        `Carbone API Error (${renderResponse.status}): ${errorText}`,
       );
     }
 
@@ -50,7 +56,7 @@ export async function POST(req: Request) {
     if (!pdfResponse.ok) {
       const errorText = await pdfResponse.text();
       throw new Error(
-        `Error al descargar el PDF: ${pdfResponse.status} ${errorText}`
+        `Error al descargar el PDF: ${pdfResponse.status} ${errorText}`,
       );
     }
 
@@ -70,7 +76,7 @@ export async function POST(req: Request) {
     console.error("Error en la API:", error.message);
     return NextResponse.json(
       { error: error.message || "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
