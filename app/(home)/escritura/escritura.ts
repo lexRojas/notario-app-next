@@ -7,7 +7,6 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 // Instanciamos Prisma Client
 const prisma = new PrismaClient();
 
-
 export async function getData() {
   try {
     const result: ValorUsual[] = await prisma.valores_usuales.findMany({
@@ -88,7 +87,7 @@ export async function insertValorUsual(data: {
 
 // Función para actualizar un registro existente
 export async function updateValorUsual(data: {
-  id: bigint | null;
+  id: number | null;
   folio_1: number;
   pag_1: string;
   folio_2: number;
@@ -109,7 +108,7 @@ export async function updateValorUsual(data: {
   try {
     const result = await prisma.valores_usuales.update({
       where: {
-        id: BigInt(data.id!),
+        id: data.id!,
       },
       data: {
         folio_1: Number(data.folio_1),
@@ -140,11 +139,11 @@ export async function updateValorUsual(data: {
 }
 
 // Función para eliminar un registro existente
-export async function deleteValorUsual(id: bigint) {
+export async function deleteValorUsual(id: number) {
   try {
     const result = await prisma.valores_usuales.delete({
       where: {
-        id: BigInt(id),
+        id: id,
       },
     });
     return result;
