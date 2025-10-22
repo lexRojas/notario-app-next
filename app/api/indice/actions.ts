@@ -119,12 +119,16 @@ export const getIndice = async (
       mensaje = "-- NO CARTULE ESTA QUINCENA -- / ULTIMA LINEA --";
     }
 
-    const newData = data.map((item) => ({
-      ...item,
-      fecha: new Date(item.fecha!).toLocaleDateString("es-CR", {
-        timeZone: "America/Costa_Rica",
-      }),
-    }));
+    const newData = data.map((item) => {
+      const [year, month, day] = item.fecha!.split("-"); // Divide la fecha en día, mes y año
+      console.log(day, month, year);
+      const formattedDate = new Date(`${year}-${month}-${day}T00:00:00-06:00`); // Formato ISO y zona horaria
+      console.log(formattedDate);
+      return {
+        ...item,
+        fecha: formattedDate.toLocaleDateString("es-ES"),
+      };
+    });
 
     const result: indiceTemplate = {
       mensaje: mensaje,
