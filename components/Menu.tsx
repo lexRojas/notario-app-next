@@ -8,7 +8,7 @@ export function MenuPrincipal() {
     return (
         <MegaMenu>
             <NavbarBrand href="/">
-                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Mi Aplicación</span>
+                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Notario Rojas</span>
             </NavbarBrand>
             <div className="order-2 hidden items-center md:flex">
                 <Link
