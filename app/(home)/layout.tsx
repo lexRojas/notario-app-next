@@ -1,9 +1,9 @@
-import { ThemeModeScript } from "flowbite-react";
+import { ThemeModeScript, ThemeProvider } from "flowbite-react";
 import type { Metadata } from "next";
 import { geistMono, geistSans } from "@/fonts/fonts";
 import { MenuPrincipal } from "@/components/Menu";
 import "@/styles/globals.css";
- 
+
 
 
 
@@ -29,7 +29,10 @@ export default function RootLayout({
         <header>
           <MenuPrincipal />
         </header>
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
+
 
 
       </body>

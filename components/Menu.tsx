@@ -31,68 +31,31 @@ export function MenuPrincipal() {
                                     Escrituras
                                 </Link>
                             </li>
-                            <li>
-                                <Link href="/registro" className="hover:text-primary-600 dark:hover:text-primary-500">
-                                    Registro
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                                    Actos por Registro
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                                    Timbres
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                                    Rangos de Honorarios
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                                    Variables
-                                </Link>
-                            </li>
+
                         </ul>
                     </div>
 
                 </MegaMenuDropdown>
 
 
-                {/* Menú "Cálculos" */}
-
-                <MegaMenuDropdown toggle={<>Cálculos</>}>
-
-                    <ul className="grid grid-cols-2">
-                        <div className="space-y-4 p-4">
-                            <li>
-                                <Link href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                                    Honorarios Abogado
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="hover:text-primary-600 dark:hover:text-primary-500">
-                                    Honorarios Notario
-                                </Link>
-                            </li>
-                        </div>
-                    </ul>
-
-                </MegaMenuDropdown>
-                {/* Menú "Cálculos" */}
+                {/* Menú "Reportes" */}
 
                 <MegaMenuDropdown toggle={<>Reportes</>}>
 
                     <ul className="grid grid-cols-2">
                         <div className="space-y-4 p-4">
-                            <li>
-                                <Link href="/reportes/indice" className="hover:text-primary-600 dark:hover:text-primary-500">
-                                    Indice Notarial
-                                </Link>
-                            </li>
+                            <ul>
+                                <li>
+                                    <Link href="/reportes/indice" className="hover:text-primary-600 dark:hover:text-primary-500">
+                                        Indice Notarial
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/reportes/lista_escrituras" className="hover:text-primary-600 dark:hover:text-primary-500">
+                                        Escrituras digitadas
+                                    </Link>
+                                </li>
+                            </ul>
                         </div>
                     </ul>
 

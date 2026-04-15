@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button, Spinner, TextInput, HR } from "flowbite-react";
-import { insertValorUsual, updateValorUsual, deleteValorUsual, getData } from "./escritura"; // Estas funciones debes implementarlas para interactuar con la base de datos
+import { insertValorUsual, updateValorUsual, deleteValorUsual, getData } from "../../api/escrituras/actions"; 
 import TablasFiltros from "@/components/TablaFiltros";
 import { ValorUsual } from "@/types/types";
 
