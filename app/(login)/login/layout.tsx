@@ -1,6 +1,6 @@
 import { ThemeModeScript } from "flowbite-react";
 import type { Metadata } from "next";
-import "./styles/globals.css"
+import "../../../styles/globals.css";
 import { geistMono, geistSans } from "@/fonts/fonts";
 
 
