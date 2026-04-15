@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
-        <ThemeModeScript mode="light" />
+        
 
       </head>
       <body
@@ -29,9 +29,9 @@ export default function RootLayout({
         <header>
           <MenuPrincipal />
         </header>
-        <ThemeProvider>
+        
           {children}
-        </ThemeProvider>
+        
 
 
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button, Spinner, TextInput, HR } from "flowbite-react";
-import { insertValorUsual, updateValorUsual, deleteValorUsual, getData } from "../../api/escrituras/actions"; 
+import { insertValorUsual, updateValorUsual, deleteValorUsual, getData } from "../../api/escrituras/actions";
 import TablasFiltros from "@/components/TablaFiltros";
 import { ValorUsual } from "@/types/types";
 
@@ -74,7 +74,7 @@ export default function Page() {
     }
     loadData();
 
-  }, [openModal])
+  }, [])
 
 
 
@@ -411,30 +411,33 @@ export default function Page() {
               <Button
                 name="insert"
                 type="submit"
-                className="">
+                className="bg-blue-950">
                 Registrar Escritura
               </Button>
             )}
-            {formData.id && (<>
+            {/* {formData.id && (<> */}
 
-              <Button
-                name="modify"
-                type="submit"
-                className=""
-              >
-                Modificar Escritura
-              </Button>
-
-              <Button
-                name="delete"
-                type="submit"
-                className=""
-                color={"red"} >
-                Eliminar Escritura
-              </Button>
-            </>
-            )}
             <Button
+              name="modify"
+              type="submit"
+              className="bg-blue-950"
+
+            >
+              Modificar Escritura
+            </Button>
+
+            <Button
+              name="delete"
+              type="submit"
+
+              color={"red"} >
+              Eliminar Escritura
+            </Button>
+            {/* </>
+            )} */}
+            <Button
+              className="bg-blue-950"
+
               onClick={() => setFormData(blankForm)}
             >
               Cancelar

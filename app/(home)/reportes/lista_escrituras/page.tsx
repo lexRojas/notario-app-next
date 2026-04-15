@@ -32,7 +32,7 @@ export default function escrituras() {
                             <TableHeadCell className="w-28 ">Escritura</TableHeadCell>
                             <TableHeadCell className="w-28 ">F.Inicio</TableHeadCell>
                             <TableHeadCell className="w-28 ">F.Final</TableHeadCell>
-                            <TableHeadCell className="w-28 ">Fecha</TableHeadCell>
+                            <TableHeadCell className="w-38 ">Fecha</TableHeadCell>
                             <TableHeadCell className="w-28 ">Hora</TableHeadCell>
                             <TableHeadCell>Contrato</TableHeadCell>
                             <TableHeadCell>Partes</TableHeadCell>
@@ -48,7 +48,7 @@ export default function escrituras() {
                                     <TableCell>{escritura.folio_1 + escritura.pag_1?.substring(0,1)!}</TableCell>
                                     <TableCell>{escritura.folio_2 + escritura.pag_2?.substring(0,1)!}</TableCell>
                                     <TableCell>{escritura.fecha}</TableCell>
-                                    <TableCell>{escritura.hora}</TableCell>
+                                    <TableCell>{escritura.hora + ":" + escritura.minutos?.toString().padStart(2, '0').substring(0,2)}</TableCell>
                                     <TableCell>{escritura.contrato}</TableCell>
                                     <TableCell>{escritura.partes}</TableCell>
                                 </TableRow>
