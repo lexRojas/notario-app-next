@@ -28,12 +28,12 @@ export default function escrituras() {
                 <Table >
                     <TableHead className=" sticky top-0 bg-white dark:border-gray-700 dark:bg-gray-800">
                         <TableRow className="text-black ">
-                            <TableHeadCell>ID</TableHeadCell>
-                            <TableHeadCell>Escritura</TableHeadCell>
-                            <TableHeadCell>F.Inicio</TableHeadCell>
-                            <TableHeadCell>F.Final</TableHeadCell>
-                            <TableHeadCell>Fecha</TableHeadCell>
-                            <TableHeadCell>Hora</TableHeadCell>
+                            <TableHeadCell className="w-3.5">ID</TableHeadCell>
+                            <TableHeadCell className="w-28 ">Escritura</TableHeadCell>
+                            <TableHeadCell className="w-28 ">F.Inicio</TableHeadCell>
+                            <TableHeadCell className="w-28 ">F.Final</TableHeadCell>
+                            <TableHeadCell className="w-28 ">Fecha</TableHeadCell>
+                            <TableHeadCell className="w-28 ">Hora</TableHeadCell>
                             <TableHeadCell>Contrato</TableHeadCell>
                             <TableHeadCell>Partes</TableHeadCell>
                         </TableRow>
