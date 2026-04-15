@@ -1,9 +1,9 @@
 import { ThemeModeScript } from "flowbite-react";
 import type { Metadata } from "next";
-import { ThemeInit } from "../../.flowbite-react/init"
-import "@/app/globals.css";
 import { geistMono, geistSans } from "@/fonts/fonts";
 import { MenuPrincipal } from "@/components/Menu";
+import "@/styles/globals.css";
+ 
 
 
 
@@ -26,7 +26,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-blue-200 antialiased`}
       >
-        <ThemeInit />
         <header>
           <MenuPrincipal />
         </header>
