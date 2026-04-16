@@ -232,7 +232,7 @@ export default function Page() {
               <span className="ml-2 flex items-end">
                 <Button
                   onClick={() => setOpenModal(true)}>
-                  <span className="text-xs">Buscar</span>
+                  <span className=" bg-green-800 text-xs p-2 rounded-e-xl text-white">Buscar</span>
                 </Button>
               </span>
             </div>
